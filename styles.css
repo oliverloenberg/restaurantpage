@@ -114,7 +114,7 @@ body {
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: cover;
-  background-position: right 30% bottom 65%;
+  background-position: right 50% bottom 65%;
   grid-template-areas:
     "header"
     "main"
@@ -202,6 +202,7 @@ header {
 
 .show-nav {
   left: 84%;
+  left: 83.4%;
 }
 
 .nav-ul-container {
@@ -456,6 +457,12 @@ footer {
   /* justify-content: center; */
 }
 
+@media only screen and (min-width: 375px) {
+  .show-nav {
+    left: 84%;
+  }
+}
+
 @media only screen and (min-width: 413px) {
   .show-nav {
     left: 85.39%;
@@ -473,6 +480,10 @@ footer {
 }
 
 @media only screen and (min-width: 1024px) {
+  body {
+    background-position: right 40% bottom 75%;
+  }
+
   .nav-menu {
     height: 15%;
     top: 81.5%;
@@ -488,6 +499,7 @@ footer {
 @media only screen and (min-width: 1280px) {
   body {
     grid-template-rows: 200px 3fr 200px;
+    background-position: right 30% bottom 65%;
   }
 
   header {
