@@ -5,7 +5,7 @@ html {
   font-family: "Nunito", sans-serif;
   font-size: 16px;
   color: white;
-  background: url("img/backgroundSmall.jpg") no-repeat center center scroll;
+  background: url("img/backgroundSmall.jpg") no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -488,7 +488,6 @@ footer {
   html {
     background-position: right 40% bottom 75%;
     background-image: url("img/background.jpg");
-    background-attachment: fixed;
   }
 
   .nav-menu {
