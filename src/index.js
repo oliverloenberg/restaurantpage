@@ -7,20 +7,17 @@ import {
 } from "./homepageload";
 import { initiateMenuMain } from "./menupageload";
 import { initiateContactMain } from "./contactpageload";
+import {
+  createSlideGallery,
+  changeSlide,
+  getCurrentSlideNum,
+} from "./imageslider";
 
 //initiateHeader();
 
 initiateHomeMain();
 
 initiateFooter();
-
-function component() {
-  const element = document.createElement("div");
-
-  element.innerHTML = _.join(["Hello", " webpack"], "");
-
-  return element;
-}
 
 function resetMainContent() {
   const mainNode = document.querySelector("main");
@@ -33,6 +30,7 @@ function createNewMain(event) {
       //console.log("Home link was clicked!");
       resetMainContent();
       initiateHomeMain();
+      initiateSlider();
       break;
 
     case "menu":
@@ -133,8 +131,48 @@ console.log(navUlLinkContainer);
 
 navUlLinkContainer.addEventListener("click", (event) => createNewMain(event));
 
-//document.body.appendChild(component());
+//Image slider section
 
-console.log("Hello!");
+const initiateSlider = () => {
+  const homePageImageContentCnt = document.querySelector(".content-block-img");
 
-console.log(test("dope"));
+  console.log(homePageImageContentCnt);
+
+  const imgGallery = ["img/food.jpg", "img/food2.jpg", "img/food3.jpg"];
+
+  //Grab the image container we need to pass to createSlideGallaery func
+  const divImgCnt = document.querySelector(".div-img");
+
+  const slideGallery = createSlideGallery(divImgCnt, imgGallery);
+
+  console.log(slideGallery);
+
+  homePageImageContentCnt.addEventListener("click", (event) => {
+    const clickedClass = event.target.className;
+    console.log(clickedClass);
+
+    switch (clickedClass) {
+      case "arrow-left-div":
+      case "arrow-left":
+        changeSlide(getCurrentSlideNum(), "left");
+        if (clickedClass == "arrow-left-div") {
+          console.log("Arrow left div was clicked");
+        } else {
+          console.log("arrow left icon was clicked");
+        }
+        break;
+
+      case "shown-img":
+        console.log("Shown img was clicked");
+        break;
+
+      case "arrow-right-div":
+      case "arrow-right":
+        changeSlide(getCurrentSlideNum(), "right");
+        console.log("Arrow right div was clicked");
+        break;
+    }
+  });
+};
+
+initiateSlider();

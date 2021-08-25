@@ -108,10 +108,64 @@ const initiateHomeMain = () => {
 
   divContentBlock.appendChild(divContentBlockImg);
 
+  const divContentImgAndArrows = document.createElement("div");
+  divContentImgAndArrows.className = "img-and-arrows";
+
+  divContentBlockImg.appendChild(divContentImgAndArrows);
+
+  const arrowLeftDiv = document.createElement("div");
+  arrowLeftDiv.className = "arrow-left-div";
+
+  divContentImgAndArrows.appendChild(arrowLeftDiv);
+
+  const arrowLeft = document.createElement("img");
+  arrowLeft.setAttribute("src", "img/arrowLeft.svg");
+  arrowLeft.className = "arrow-left";
+
+  arrowLeftDiv.appendChild(arrowLeft);
+
+  const divImg = document.createElement("div");
+  divImg.className = "div-img";
+
+  divContentImgAndArrows.appendChild(divImg);
+
   const section1img1 = document.createElement("img");
   section1img1.setAttribute("src", "img/food.jpg");
+  section1img1.className = "shown-img";
+  section1img1.setAttribute("data-imgNum", `0`);
 
-  divContentBlockImg.appendChild(section1img1);
+  divImg.appendChild(section1img1);
+
+  const arrowRightDiv = document.createElement("div");
+  arrowRightDiv.className = "arrow-right-div";
+
+  divContentImgAndArrows.appendChild(arrowRightDiv);
+
+  const arrowRight = document.createElement("img");
+  arrowRight.setAttribute("src", "img/arrowRight.svg");
+  arrowRight.className = "arrow-right";
+
+  arrowRightDiv.appendChild(arrowRight);
+
+  const divImgContentSliderCircles = document.createElement("div");
+  divImgContentSliderCircles.className = "slider-circles";
+
+  divContentBlockImg.appendChild(divImgContentSliderCircles);
+
+  const circleFull = document.createElement("img");
+  circleFull.setAttribute("src", "img/circleFull.svg");
+
+  divImgContentSliderCircles.appendChild(circleFull);
+
+  const circleEmptyOne = document.createElement("img");
+  circleEmptyOne.setAttribute("src", "img/circleEmpty.svg");
+
+  divImgContentSliderCircles.appendChild(circleEmptyOne);
+
+  const circleEmptyTwo = document.createElement("img");
+  circleEmptyTwo.setAttribute("src", "img/circleEmpty.svg");
+
+  divImgContentSliderCircles.appendChild(circleEmptyTwo);
 
   //Section 2
 
