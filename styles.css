@@ -52,6 +52,10 @@ a {
   color: white;
 }
 
+.hide {
+  display: none;
+}
+
 /* ul {
   list-style: none;
   margin: 2rem 0;
@@ -254,9 +258,48 @@ header {
   /*  width: 80%;
   height: auto; */
   flex: 1 1;
+  flex-direction: column;
   margin: 1rem 1rem;
   display: flex;
   align-items: center;
+}
+
+.img-and-arrows {
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: stretch;
+}
+
+.arrow-left-div,
+.arrow-right-div {
+  display: flex;
+  align-items: center;
+}
+
+.arrow-left,
+.arrow-right {
+  width: 28px;
+  height: 28px;
+}
+
+.div-img {
+  margin: 0 0.5rem;
+}
+
+.div-img img {
+  width: 100%;
+  height: auto;
+}
+
+.slider-circles {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.slider-circles img {
+  width: 22px;
+  height: 22px;
 }
 
 .offer,
@@ -500,6 +543,20 @@ footer {
   .show-nav {
     left: 94.2%;
     top: 81.5%;
+  }
+
+  .img-and-arrows {
+    display: flex;
+    align-items: center;
+  }
+
+  .left-arrow,
+  .right-arrow {
+    width: 50px;
+    height: 50px;
+  }
+
+  .slider-circles {
   }
 }
 
