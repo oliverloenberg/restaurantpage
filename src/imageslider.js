@@ -23,8 +23,106 @@ const createSlideGallery = (container, imgArr) => {
   return slideGallery;
 };
 
+function toggleHide(element) {
+  console.log(
+    "Hey toggleHide has been called with the following argument: " + element
+  );
+  element.classList.toggle("hide");
+}
+
+function toggleFadeIn(element) {
+  element.classList.toggle("fade-in");
+}
+
+function toggleFadeOut(element) {
+  element.classList.toggle("fade-out");
+}
+
+function toggleInvisible(element) {
+  element.classList.toggle("invisible");
+}
+
+const hideShownImageInSlider = (imgElementsArr) => {
+  for (let i = 0; i < imgElementsArr.length; i++) {
+    if (imgElementsArr[i].classList.contains("shown-img")) {
+      imgElementsArr[i].classList.toggle("shown-img");
+      imgElementsArr[i].classList.toggle("fade-out");
+      //Remove the image from the display
+      setTimeout(toggleHide, 800, imgElementsArr[i]);
+      //Remove the fade-out class
+      setTimeout(toggleFadeOut, 800, imgElementsArr[i]);
+      //imgElementsArr[i].classList.toggle("invisible");
+    }
+  }
+};
+
+const showNextSlideImage = (currentSlideNum, imgElementsArr, direction) => {
+  let directionNum = 0;
+  console.log(currentSlideNum);
+  if (direction == "left") {
+    directionNum = -1;
+  } else {
+    directionNum = 1;
+  }
+  console.log("Changing slide to show the next image");
+  imgElementsArr[parseInt(currentSlideNum) + directionNum].classList.toggle(
+    "shown-img"
+  );
+
+  //Make sure the image is invisble when we "display" it, so it can fade in later
+  imgElementsArr[parseInt(currentSlideNum) + directionNum].classList.toggle(
+    "invisible"
+  );
+  //Now display the image after 0.8 seconds
+  setTimeout(
+    toggleHide,
+    800,
+    imgElementsArr[parseInt(currentSlideNum) + directionNum]
+  );
+  //Make sure it fades in and times it with when its fully visibile
+  setTimeout(
+    toggleFadeIn,
+    900,
+    imgElementsArr[parseInt(currentSlideNum) + directionNum]
+  );
+  //Remove the invisible css class
+  setTimeout(
+    toggleInvisible,
+    900,
+    imgElementsArr[parseInt(currentSlideNum) + directionNum]
+  );
+  //Remove the fade in css class
+  setTimeout(
+    toggleFadeIn,
+    1800,
+    imgElementsArr[parseInt(currentSlideNum) + directionNum]
+  );
+};
+
+const hideAllDots = (dotsArr) => {
+  //Go through all the dots and set them to empty
+  console.log("You are now about to enter the change dots to empty for loop");
+  for (let i = 0; i < dotsArr.length; i++) {
+    //console.log(dotsArr[i]);
+    dotsArr[i].setAttribute("src", "img/circleEmpty.svg");
+  }
+};
+
+const showNextDot = (currentSlideNum, dotsArr, direction) => {
+  let directionNum = 0;
+  if (direction == "left") {
+    directionNum = -1;
+  } else {
+    directionNum = 1;
+  }
+  dotsArr[parseInt(currentSlideNum) + directionNum].setAttribute(
+    "src",
+    "img/circleFull.svg"
+  );
+};
+
 //Referencing the slider gallery that we created in the index.js file we can now change the slides, given the direction we are changing in
-const changeSlide = (currentSlideNum, direction) => {
+const changeSlide = (currentSlideNum, direction, status) => {
   console.log("You are now in the changeSlide func");
   console.log("The currentSlideNum is: " + currentSlideNum);
   const divImgCnt = document.querySelector(".div-img");
@@ -39,53 +137,37 @@ const changeSlide = (currentSlideNum, direction) => {
   const dotsArr = [...htmlDotsArr];
   console.log(dotsArr);
 
-  //Now we show the relevant image and dots
+  //First check if automatic slider has reached the end and now wants to restart.
+  if (status == "restart") {
+    console.log("Time for a restart!");
+    setTimeout(toggleHide, 800, imgElementsArr[0]);
+    //imgElementsArr[0].classList.remove("hide");
+    imgElementsArr[0].classList.add("shown-img");
+    /* imgElementsArr[0].classList.add("invisible");
+    imgElementsArr[0].classList.add("fade-in");
+    imgElementsArr[0].classList.remove("invisible"); */
+    console.log(imgElementsArr[0]);
+  } else {
+  }
+
+  //Hide all the images
   if (currentSlideNum != 0 && direction == "left") {
-    for (let i = 0; i < imgElementsArr.length; i++) {
-      if (imgElementsArr[i].classList.contains("shown-img")) {
-        imgElementsArr[i].classList.toggle("shown-img");
-        imgElementsArr[i].classList.toggle("hide");
-      }
-    }
+    //Hide the shown image
+    hideShownImageInSlider(imgElementsArr);
+    //Now show the next slide image
+    showNextSlideImage(currentSlideNum, imgElementsArr, "left");
+
     //Go through all the dots and set them to empty
-    console.log("You are now about to enter the change dots to empty for loop");
-    for (let i = 0; i < dotsArr.length; i++) {
-      //console.log(dotsArr[i]);
-      dotsArr[i].setAttribute("src", "img/circleEmpty.svg");
-    }
-    console.log("Changing slide to show the previous image");
-    imgElementsArr[parseInt(currentSlideNum) - 1].classList.toggle("hide");
-    imgElementsArr[parseInt(currentSlideNum) - 1].classList.toggle("shown-img");
-
-    //Show the previous dots
-    dotsArr[parseInt(currentSlideNum) - 1].setAttribute(
-      "src",
-      "img/circleFull.svg"
-    );
-
-    //divImgCnt
+    hideAllDots(dotsArr);
+    showNextDot(currentSlideNum, dotsArr, "left");
   } else if (currentSlideNum != 2 && direction == "right") {
-    for (let i = 0; i < imgElementsArr.length; i++) {
-      if (imgElementsArr[i].classList.contains("shown-img")) {
-        imgElementsArr[i].classList.toggle("shown-img");
-        imgElementsArr[i].classList.toggle("hide");
-      }
-    }
-    //Go through all the dots and set them to empty
-    console.log("You are now about to enter the change dots to empty for loop");
-    for (let i = 0; i < dotsArr.length; i++) {
-      //console.log(dotsArr[i]);
-      dotsArr[i].setAttribute("src", "img/circleEmpty.svg");
-    }
-    console.log("Changing slide to show the next image");
-    imgElementsArr[parseInt(currentSlideNum) + 1].classList.toggle("hide");
-    imgElementsArr[parseInt(currentSlideNum) + 1].classList.toggle("shown-img");
+    //Hide the shown image
+    hideShownImageInSlider(imgElementsArr);
+    //Show the next image
+    showNextSlideImage(currentSlideNum, imgElementsArr, "right");
 
-    //show the next dot
-    dotsArr[parseInt(currentSlideNum) + 1].setAttribute(
-      "src",
-      "img/circleFull.svg"
-    );
+    hideAllDots(dotsArr);
+    showNextDot(currentSlideNum, dotsArr, "right");
   } else {
     console.log(
       "You are either at the end or beginning of the slide show and cant move further forward or backwards!"

@@ -169,6 +169,8 @@ const initiateSlider = () => {
       case "arrow-right-div":
       case "arrow-right":
         changeSlide(getCurrentSlideNum(), "right");
+        clearInterval(slideChangeInterval);
+        //slideChangeInterval = window.setInterval(autoSlideChange, 6000);
         console.log("Arrow right div was clicked");
         break;
     }
@@ -176,3 +178,22 @@ const initiateSlider = () => {
 };
 
 initiateSlider();
+
+function autoSlideChange() {
+  console.log("Hi");
+  let slideNum = 0;
+
+  if (getCurrentSlideNum() >= 0 && getCurrentSlideNum() < 2) {
+    slideNum = getCurrentSlideNum();
+    changeSlide(slideNum, "right");
+  } else if (getCurrentSlideNum() == 2) {
+    console.log("You are now at the end of the line");
+    console.log(getCurrentSlideNum());
+    slideNum = -1;
+    changeSlide(slideNum, "right", "restart");
+  }
+
+  //changeSlide(slideNum, "right");
+}
+
+const slideChangeInterval = window.setInterval(autoSlideChange, 5000);
