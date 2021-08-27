@@ -155,12 +155,7 @@ const initiateSlider = () => {
       case "arrow-left-div":
       case "arrow-left":
         changeSlide(getCurrentSlideNum(), "left");
-        if (clickedClass == "arrow-left-div") {
-          console.log("Arrow left div was clicked");
-        } else {
-          console.log("arrow left icon was clicked");
-        }
-        break;
+        clearInterval(slideChangeInterval);
 
       case "shown-img":
         console.log("Shown img was clicked");

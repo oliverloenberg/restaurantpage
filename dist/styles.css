@@ -807,12 +807,14 @@ footer {
 @media only screen and (min-width: 1920px) {
   .show-desktop-nav {
     left: 96%;
+    height: 21.7%;
   }
 }
 
 @media only screen and (min-width: 2560px) {
   .nav-menu {
     width: 86px;
+    height: 15.2%;
   }
   .show-desktop-nav {
     left: 96.5%;
